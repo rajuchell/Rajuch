@@ -1,0 +1,3266 @@
+<p>
+    &lt;!DOCTYPE html&gt;
+</p>
+<p>
+    &lt;html lang="en"&gt;
+</p>
+<p>
+    &lt;head&gt;
+</p>
+<p>
+    &lt;meta charset="UTF-8"&gt;
+</p>
+<p>
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+</p>
+<p>
+    &lt;title&gt;Raju CH — AI Full Stack Developer&lt;/title&gt;
+</p>
+<p>
+    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+</p>
+<p>
+    &lt;link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet"&gt;
+</p>
+<p>
+    &lt;style&gt;
+</p>
+<p>
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+</p>
+<p>
+      :root {
+</p>
+<p>
+        --black: #080808;
+</p>
+<p>
+        --white: #f5f2ee;
+</p>
+<p>
+        --cream: #ede8e0;
+</p>
+<p>
+        --accent: #c8f54a;
+</p>
+<p>
+        --accent2: #4af5c8;
+</p>
+<p>
+        --muted: #888;
+</p>
+<p>
+        --border: rgba(245,242,238,0.12);
+</p>
+<p>
+        --card-bg: rgba(255,255,255,0.03);
+</p>
+<p>
+      }
+</p>
+<p>
+      html { scroll-behavior: smooth; }
+</p>
+<p>
+      body {
+</p>
+<p>
+        background: var(--black);
+</p>
+<p>
+        color: var(--white);
+</p>
+<p>
+        font-family: 'Syne', sans-serif;
+</p>
+<p>
+        overflow-x: hidden;
+</p>
+<p>
+        cursor: none;
+</p>
+<p>
+      }
+</p>
+<p>
+      /* CUSTOM CURSOR */
+</p>
+<p>
+      .cursor {
+</p>
+<p>
+        position: fixed;
+</p>
+<p>
+        width: 12px; height: 12px;
+</p>
+<p>
+        background: var(--accent);
+</p>
+<p>
+        border-radius: 50%;
+</p>
+<p>
+        pointer-events: none;
+</p>
+<p>
+        z-index: 9999;
+</p>
+<p>
+        transition: transform 0.15s ease, opacity 0.2s;
+</p>
+<p>
+        mix-blend-mode: difference;
+</p>
+<p>
+      }
+</p>
+<p>
+      .cursor-ring {
+</p>
+<p>
+        position: fixed;
+</p>
+<p>
+        width: 36px; height: 36px;
+</p>
+<p>
+        border: 1px solid var(--accent);
+</p>
+<p>
+        border-radius: 50%;
+</p>
+<p>
+        pointer-events: none;
+</p>
+<p>
+        z-index: 9998;
+</p>
+<p>
+        transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), opacity 0.3s;
+</p>
+<p>
+        opacity: 0.5;
+</p>
+<p>
+      }
+</p>
+<p>
+      /* NOISE TEXTURE OVERLAY */
+</p>
+<p>
+      body::before {
+</p>
+<p>
+        content: '';
+</p>
+<p>
+        position: fixed;
+</p>
+<p>
+        inset: 0;
+</p>
+<p>
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+</p>
+<p>
+        pointer-events: none;
+</p>
+<p>
+        z-index: 1000;
+</p>
+<p>
+        opacity: 0.4;
+</p>
+<p>
+      }
+</p>
+<p>
+      /* NAV */
+</p>
+<p>
+      nav {
+</p>
+<p>
+        position: fixed;
+</p>
+<p>
+        top: 0; left: 0; right: 0;
+</p>
+<p>
+        z-index: 100;
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        justify-content: space-between;
+</p>
+<p>
+        align-items: center;
+</p>
+<p>
+        padding: 28px 60px;
+</p>
+<p>
+        background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+</p>
+<p>
+        backdrop-filter: blur(0px);
+</p>
+<p>
+      }
+</p>
+<p>
+      .nav-logo {
+</p>
+<p>
+        font-family: 'Instrument Serif', serif;
+</p>
+<p>
+        font-style: italic;
+</p>
+<p>
+        font-size: 1.5rem;
+</p>
+<p>
+        color: var(--accent);
+</p>
+<p>
+        letter-spacing: -0.02em;
+</p>
+<p>
+      }
+</p>
+<p>
+      .nav-links {
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        gap: 40px;
+</p>
+<p>
+        list-style: none;
+</p>
+<p>
+      }
+</p>
+<p>
+      .nav-links a {
+</p>
+<p>
+        color: var(--muted);
+</p>
+<p>
+        text-decoration: none;
+</p>
+<p>
+        font-size: 0.8rem;
+</p>
+<p>
+        font-weight: 500;
+</p>
+<p>
+        letter-spacing: 0.12em;
+</p>
+<p>
+        text-transform: uppercase;
+</p>
+<p>
+        transition: color 0.3s;
+</p>
+<p>
+      }
+</p>
+<p>
+      .nav-links a:hover { color: var(--white); }
+</p>
+<p>
+      .nav-cta {
+</p>
+<p>
+        background: var(--accent);
+</p>
+<p>
+        color: var(--black);
+</p>
+<p>
+        padding: 10px 24px;
+</p>
+<p>
+        border-radius: 100px;
+</p>
+<p>
+        font-size: 0.8rem;
+</p>
+<p>
+        font-weight: 700;
+</p>
+<p>
+        text-decoration: none;
+</p>
+<p>
+        letter-spacing: 0.08em;
+</p>
+<p>
+        text-transform: uppercase;
+</p>
+<p>
+        transition: transform 0.2s, background 0.2s;
+</p>
+<p>
+      }
+</p>
+<p>
+      .nav-cta:hover { transform: scale(1.05); background: #d9ff5a; }
+</p>
+<p>
+      /* HERO */
+</p>
+<p>
+      .hero {
+</p>
+<p>
+        min-height: 100vh;
+</p>
+<p>
+        display: grid;
+</p>
+<p>
+        grid-template-columns: 1fr 1fr;
+</p>
+<p>
+        align-items: center;
+</p>
+<p>
+        padding: 120px 60px 80px;
+</p>
+<p>
+        position: relative;
+</p>
+<p>
+        overflow: hidden;
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-bg {
+</p>
+<p>
+        position: absolute;
+</p>
+<p>
+        inset: 0;
+</p>
+<p>
+        background: 
+</p>
+<p>
+          radial-gradient(ellipse 80% 60% at 70% 50%, rgba(200,245,74,0.06) 0%, transparent 60%),
+</p>
+<p>
+          radial-gradient(ellipse 50% 50% at 20% 80%, rgba(74,245,200,0.04) 0%, transparent 50%);
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-grid-lines {
+</p>
+<p>
+        position: absolute;
+</p>
+<p>
+        inset: 0;
+</p>
+<p>
+        background-image: 
+</p>
+<p>
+          linear-gradient(rgba(245,242,238,0.03) 1px, transparent 1px),
+</p>
+<p>
+          linear-gradient(90deg, rgba(245,242,238,0.03) 1px, transparent 1px);
+</p>
+<p>
+        background-size: 80px 80px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-left {
+</p>
+<p>
+        position: relative;
+</p>
+<p>
+        z-index: 2;
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-badge {
+</p>
+<p>
+        display: inline-flex;
+</p>
+<p>
+        align-items: center;
+</p>
+<p>
+        gap: 8px;
+</p>
+<p>
+        background: rgba(200,245,74,0.1);
+</p>
+<p>
+        border: 1px solid rgba(200,245,74,0.25);
+</p>
+<p>
+        color: var(--accent);
+</p>
+<p>
+        padding: 6px 16px;
+</p>
+<p>
+        border-radius: 100px;
+</p>
+<p>
+        font-size: 0.72rem;
+</p>
+<p>
+        font-weight: 600;
+</p>
+<p>
+        letter-spacing: 0.1em;
+</p>
+<p>
+        text-transform: uppercase;
+</p>
+<p>
+        margin-bottom: 32px;
+</p>
+<p>
+        animation: fadeUp 0.8s ease both;
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-badge::before {
+</p>
+<p>
+        content: '';
+</p>
+<p>
+        width: 6px; height: 6px;
+</p>
+<p>
+        background: var(--accent);
+</p>
+<p>
+        border-radius: 50%;
+</p>
+<p>
+        animation: pulse 2s infinite;
+</p>
+<p>
+      }
+</p>
+<p>
+      @keyframes pulse {
+</p>
+<p>
+        0%, 100% { opacity: 1; transform: scale(1); }
+</p>
+<p>
+        50% { opacity: 0.5; transform: scale(0.7); }
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-name {
+</p>
+<p>
+        font-family: 'Syne', sans-serif;
+</p>
+<p>
+        font-size: clamp(3.5rem, 6vw, 5.5rem);
+</p>
+<p>
+        font-weight: 800;
+</p>
+<p>
+        line-height: 0.95;
+</p>
+<p>
+        letter-spacing: -0.03em;
+</p>
+<p>
+        margin-bottom: 8px;
+</p>
+<p>
+        animation: fadeUp 0.8s 0.1s ease both;
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-name em {
+</p>
+<p>
+        font-family: 'Instrument Serif', serif;
+</p>
+<p>
+        font-style: italic;
+</p>
+<p>
+        font-weight: 400;
+</p>
+<p>
+        color: var(--accent);
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-title {
+</p>
+<p>
+        font-size: clamp(1rem, 1.8vw, 1.3rem);
+</p>
+<p>
+        color: var(--muted);
+</p>
+<p>
+        font-weight: 400;
+</p>
+<p>
+        margin-bottom: 32px;
+</p>
+<p>
+        animation: fadeUp 0.8s 0.2s ease both;
+</p>
+<p>
+        font-family: 'JetBrains Mono', monospace;
+</p>
+<p>
+        font-size: 0.9rem;
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-title span {
+</p>
+<p>
+        color: var(--accent2);
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-desc {
+</p>
+<p>
+        font-size: 1.05rem;
+</p>
+<p>
+        line-height: 1.7;
+</p>
+<p>
+        color: rgba(245,242,238,0.65);
+</p>
+<p>
+        max-width: 480px;
+</p>
+<p>
+        margin-bottom: 48px;
+</p>
+<p>
+        animation: fadeUp 0.8s 0.3s ease both;
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-actions {
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        gap: 16px;
+</p>
+<p>
+        animation: fadeUp 0.8s 0.4s ease both;
+</p>
+<p>
+      }
+</p>
+<p>
+      .btn-primary {
+</p>
+<p>
+        background: var(--accent);
+</p>
+<p>
+        color: var(--black);
+</p>
+<p>
+        padding: 14px 32px;
+</p>
+<p>
+        border-radius: 100px;
+</p>
+<p>
+        font-size: 0.85rem;
+</p>
+<p>
+        font-weight: 700;
+</p>
+<p>
+        text-decoration: none;
+</p>
+<p>
+        letter-spacing: 0.05em;
+</p>
+<p>
+        text-transform: uppercase;
+</p>
+<p>
+        transition: transform 0.2s, box-shadow 0.2s;
+</p>
+<p>
+        box-shadow: 0 0 40px rgba(200,245,74,0.2);
+</p>
+<p>
+      }
+</p>
+<p>
+      .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(200,245,74,0.35); }
+</p>
+<p>
+      .btn-ghost {
+</p>
+<p>
+        border: 1px solid var(--border);
+</p>
+<p>
+        color: var(--white);
+</p>
+<p>
+        padding: 14px 32px;
+</p>
+<p>
+        border-radius: 100px;
+</p>
+<p>
+        font-size: 0.85rem;
+</p>
+<p>
+        font-weight: 600;
+</p>
+<p>
+        text-decoration: none;
+</p>
+<p>
+        letter-spacing: 0.05em;
+</p>
+<p>
+        text-transform: uppercase;
+</p>
+<p>
+        transition: border-color 0.2s, background 0.2s;
+</p>
+<p>
+      }
+</p>
+<p>
+      .btn-ghost:hover { border-color: rgba(245,242,238,0.4); background: rgba(245,242,238,0.05); }
+</p>
+<p>
+      .hero-right {
+</p>
+<p>
+        position: relative;
+</p>
+<p>
+        z-index: 2;
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        justify-content: flex-end;
+</p>
+<p>
+        align-items: center;
+</p>
+<p>
+        animation: fadeIn 1s 0.3s ease both;
+</p>
+<p>
+      }
+</p>
+<p>
+      .hero-visual {
+</p>
+<p>
+        width: 420px;
+</p>
+<p>
+        height: 420px;
+</p>
+<p>
+        position: relative;
+</p>
+<p>
+      }
+</p>
+<p>
+      .visual-ring {
+</p>
+<p>
+        position: absolute;
+</p>
+<p>
+        inset: 0;
+</p>
+<p>
+        border-radius: 50%;
+</p>
+<p>
+        border: 1px solid rgba(200,245,74,0.15);
+</p>
+<p>
+        animation: spinSlow 20s linear infinite;
+</p>
+<p>
+      }
+</p>
+<p>
+      .visual-ring::before {
+</p>
+<p>
+        content: '';
+</p>
+<p>
+        position: absolute;
+</p>
+<p>
+        top: -4px; left: 50%;
+</p>
+<p>
+        width: 8px; height: 8px;
+</p>
+<p>
+        background: var(--accent);
+</p>
+<p>
+        border-radius: 50%;
+</p>
+<p>
+        transform: translateX(-50%);
+</p>
+<p>
+        box-shadow: 0 0 16px var(--accent);
+</p>
+<p>
+      }
+</p>
+<p>
+      .visual-ring-2 {
+</p>
+<p>
+        inset: 30px;
+</p>
+<p>
+        animation-duration: 15s;
+</p>
+<p>
+        animation-direction: reverse;
+</p>
+<p>
+        border-color: rgba(74,245,200,0.1);
+</p>
+<p>
+      }
+</p>
+<p>
+      .visual-ring-2::before { background: var(--accent2); box-shadow: 0 0 16px var(--accent2); }
+</p>
+<p>
+      @keyframes spinSlow { to { transform: rotate(360deg); } }
+</p>
+<p>
+      .visual-center {
+</p>
+<p>
+        position: absolute;
+</p>
+<p>
+        inset: 60px;
+</p>
+<p>
+        background: radial-gradient(ellipse at center, rgba(200,245,74,0.08) 0%, transparent 70%);
+</p>
+<p>
+        border-radius: 50%;
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        align-items: center;
+</p>
+<p>
+        justify-content: center;
+</p>
+<p>
+        flex-direction: column;
+</p>
+<p>
+        gap: 8px;
+</p>
+<p>
+        text-align: center;
+</p>
+<p>
+      }
+</p>
+<p>
+      .visual-stat {
+</p>
+<p>
+        font-size: 3rem;
+</p>
+<p>
+        font-weight: 800;
+</p>
+<p>
+        line-height: 1;
+</p>
+<p>
+        color: var(--accent);
+</p>
+<p>
+      }
+</p>
+<p>
+      .visual-stat-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+</p>
+<p>
+      .floating-tags {
+</p>
+<p>
+        position: absolute;
+</p>
+<p>
+        inset: 0;
+</p>
+<p>
+      }
+</p>
+<p>
+      .ftag {
+</p>
+<p>
+        position: absolute;
+</p>
+<p>
+        background: rgba(8,8,8,0.9);
+</p>
+<p>
+        border: 1px solid var(--border);
+</p>
+<p>
+        padding: 8px 14px;
+</p>
+<p>
+        border-radius: 8px;
+</p>
+<p>
+        font-size: 0.7rem;
+</p>
+<p>
+        font-family: 'JetBrains Mono', monospace;
+</p>
+<p>
+        color: var(--muted);
+</p>
+<p>
+        white-space: nowrap;
+</p>
+<p>
+        backdrop-filter: blur(10px);
+</p>
+<p>
+        animation: float 4s ease-in-out infinite;
+</p>
+<p>
+      }
+</p>
+<p>
+      .ftag:nth-child(1) { top: 10%; left: -10%; animation-delay: 0s; }
+</p>
+<p>
+      .ftag:nth-child(2) { top: 25%; right: -8%; animation-delay: 0.8s; }
+</p>
+<p>
+      .ftag:nth-child(3) { bottom: 25%; left: -12%; animation-delay: 1.6s; }
+</p>
+<p>
+      .ftag:nth-child(4) { bottom: 10%; right: -6%; animation-delay: 2.4s; }
+</p>
+<p>
+      @keyframes float {
+</p>
+<p>
+        0%, 100% { transform: translateY(0); }
+</p>
+<p>
+        50% { transform: translateY(-8px); }
+</p>
+<p>
+      }
+</p>
+<p>
+      /* STATS BAR */
+</p>
+<p>
+      .stats-bar {
+</p>
+<p>
+        padding: 40px 60px;
+</p>
+<p>
+        border-top: 1px solid var(--border);
+</p>
+<p>
+        border-bottom: 1px solid var(--border);
+</p>
+<p>
+        display: grid;
+</p>
+<p>
+        grid-template-columns: repeat(4, 1fr);
+</p>
+<p>
+        gap: 1px;
+</p>
+<p>
+        background: var(--border);
+</p>
+<p>
+      }
+</p>
+<p>
+      .stat-item {
+</p>
+<p>
+        background: var(--black);
+</p>
+<p>
+        padding: 32px 40px;
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        flex-direction: column;
+</p>
+<p>
+        gap: 6px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .stat-number {
+</p>
+<p>
+        font-size: 2.8rem;
+</p>
+<p>
+        font-weight: 800;
+</p>
+<p>
+        line-height: 1;
+</p>
+<p>
+        color: var(--white);
+</p>
+<p>
+        letter-spacing: -0.02em;
+</p>
+<p>
+      }
+</p>
+<p>
+      .stat-number sup {
+</p>
+<p>
+        font-size: 1.2rem;
+</p>
+<p>
+        color: var(--accent);
+</p>
+<p>
+        vertical-align: super;
+</p>
+<p>
+      }
+</p>
+<p>
+      .stat-label {
+</p>
+<p>
+        font-size: 0.78rem;
+</p>
+<p>
+        color: var(--muted);
+</p>
+<p>
+        letter-spacing: 0.1em;
+</p>
+<p>
+        text-transform: uppercase;
+</p>
+<p>
+        font-weight: 500;
+</p>
+<p>
+      }
+</p>
+<p>
+      /* SECTIONS */
+</p>
+<p>
+      section { padding: 100px 60px; }
+</p>
+<p>
+      .section-label {
+</p>
+<p>
+        display: inline-flex;
+</p>
+<p>
+        align-items: center;
+</p>
+<p>
+        gap: 12px;
+</p>
+<p>
+        font-size: 0.72rem;
+</p>
+<p>
+        font-weight: 600;
+</p>
+<p>
+        letter-spacing: 0.18em;
+</p>
+<p>
+        text-transform: uppercase;
+</p>
+<p>
+        color: var(--accent);
+</p>
+<p>
+        margin-bottom: 20px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .section-label::before {
+</p>
+<p>
+        content: '';
+</p>
+<p>
+        display: block;
+</p>
+<p>
+        width: 32px;
+</p>
+<p>
+        height: 1px;
+</p>
+<p>
+        background: var(--accent);
+</p>
+<p>
+      }
+</p>
+<p>
+      .section-title {
+</p>
+<p>
+        font-size: clamp(2rem, 4vw, 3.5rem);
+</p>
+<p>
+        font-weight: 800;
+</p>
+<p>
+        line-height: 1.05;
+</p>
+<p>
+        letter-spacing: -0.02em;
+</p>
+<p>
+        margin-bottom: 60px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .section-title em {
+</p>
+<p>
+        font-family: 'Instrument Serif', serif;
+</p>
+<p>
+        font-style: italic;
+</p>
+<p>
+        font-weight: 400;
+</p>
+<p>
+        color: rgba(245,242,238,0.4);
+</p>
+<p>
+      }
+</p>
+<p>
+      /* ABOUT */
+</p>
+<p>
+      .about-grid {
+</p>
+<p>
+        display: grid;
+</p>
+<p>
+        grid-template-columns: 1fr 1fr;
+</p>
+<p>
+        gap: 80px;
+</p>
+<p>
+        align-items: start;
+</p>
+<p>
+      }
+</p>
+<p>
+      .about-text {
+</p>
+<p>
+        font-size: 1.1rem;
+</p>
+<p>
+        line-height: 1.8;
+</p>
+<p>
+        color: rgba(245,242,238,0.65);
+</p>
+<p>
+      }
+</p>
+<p>
+      .about-text strong {
+</p>
+<p>
+        color: var(--white);
+</p>
+<p>
+        font-weight: 600;
+</p>
+<p>
+      }
+</p>
+<p>
+      .about-text p + p { margin-top: 20px; }
+</p>
+<p>
+      .skills-grid {
+</p>
+<p>
+        display: grid;
+</p>
+<p>
+        grid-template-columns: 1fr 1fr;
+</p>
+<p>
+        gap: 16px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .skill-card {
+</p>
+<p>
+        background: var(--card-bg);
+</p>
+<p>
+        border: 1px solid var(--border);
+</p>
+<p>
+        border-radius: 16px;
+</p>
+<p>
+        padding: 20px;
+</p>
+<p>
+        transition: border-color 0.3s, background 0.3s, transform 0.2s;
+</p>
+<p>
+      }
+</p>
+<p>
+      .skill-card:hover {
+</p>
+<p>
+        border-color: rgba(200,245,74,0.25);
+</p>
+<p>
+        background: rgba(200,245,74,0.04);
+</p>
+<p>
+        transform: translateY(-2px);
+</p>
+<p>
+      }
+</p>
+<p>
+      .skill-card-icon {
+</p>
+<p>
+        font-size: 1.4rem;
+</p>
+<p>
+        margin-bottom: 10px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .skill-card-title {
+</p>
+<p>
+        font-size: 0.85rem;
+</p>
+<p>
+        font-weight: 700;
+</p>
+<p>
+        margin-bottom: 6px;
+</p>
+<p>
+        color: var(--white);
+</p>
+<p>
+      }
+</p>
+<p>
+      .skill-card-tags {
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        flex-wrap: wrap;
+</p>
+<p>
+        gap: 4px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .skill-tag {
+</p>
+<p>
+        font-size: 0.65rem;
+</p>
+<p>
+        font-family: 'JetBrains Mono', monospace;
+</p>
+<p>
+        color: var(--muted);
+</p>
+<p>
+        background: rgba(255,255,255,0.04);
+</p>
+<p>
+        padding: 3px 8px;
+</p>
+<p>
+        border-radius: 4px;
+</p>
+<p>
+        border: 1px solid var(--border);
+</p>
+<p>
+      }
+</p>
+<p>
+      /* PROJECTS */
+</p>
+<p>
+      .projects { background: rgba(255,255,255,0.01); }
+</p>
+<p>
+      .projects-grid {
+</p>
+<p>
+        display: grid;
+</p>
+<p>
+        grid-template-columns: repeat(3, 1fr);
+</p>
+<p>
+        gap: 24px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .project-card {
+</p>
+<p>
+        background: var(--card-bg);
+</p>
+<p>
+        border: 1px solid var(--border);
+</p>
+<p>
+        border-radius: 20px;
+</p>
+<p>
+        padding: 32px;
+</p>
+<p>
+        position: relative;
+</p>
+<p>
+        overflow: hidden;
+</p>
+<p>
+        transition: border-color 0.4s, transform 0.3s;
+</p>
+<p>
+        cursor: default;
+</p>
+<p>
+      }
+</p>
+<p>
+      .project-card::before {
+</p>
+<p>
+        content: '';
+</p>
+<p>
+        position: absolute;
+</p>
+<p>
+        inset: 0;
+</p>
+<p>
+        background: radial-gradient(ellipse at top left, rgba(200,245,74,0.05) 0%, transparent 60%);
+</p>
+<p>
+        opacity: 0;
+</p>
+<p>
+        transition: opacity 0.4s;
+</p>
+<p>
+      }
+</p>
+<p>
+      .project-card:hover {
+</p>
+<p>
+        border-color: rgba(200,245,74,0.2);
+</p>
+<p>
+        transform: translateY(-4px);
+</p>
+<p>
+      }
+</p>
+<p>
+      .project-card:hover::before { opacity: 1; }
+</p>
+<p>
+      .project-card.featured {
+</p>
+<p>
+        grid-column: span 2;
+</p>
+<p>
+        background: linear-gradient(135deg, rgba(200,245,74,0.06) 0%, rgba(8,8,8,0) 50%);
+</p>
+<p>
+        border-color: rgba(200,245,74,0.15);
+</p>
+<p>
+      }
+</p>
+<p>
+      .project-num {
+</p>
+<p>
+        font-family: 'JetBrains Mono', monospace;
+</p>
+<p>
+        font-size: 0.7rem;
+</p>
+<p>
+        color: var(--muted);
+</p>
+<p>
+        margin-bottom: 20px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .project-icon {
+</p>
+<p>
+        font-size: 2rem;
+</p>
+<p>
+        margin-bottom: 16px;
+</p>
+<p>
+        display: block;
+</p>
+<p>
+      }
+</p>
+<p>
+      .project-title {
+</p>
+<p>
+        font-size: 1.25rem;
+</p>
+<p>
+        font-weight: 700;
+</p>
+<p>
+        margin-bottom: 10px;
+</p>
+<p>
+        color: var(--white);
+</p>
+<p>
+        line-height: 1.2;
+</p>
+<p>
+      }
+</p>
+<p>
+      .project-desc {
+</p>
+<p>
+        font-size: 0.875rem;
+</p>
+<p>
+        line-height: 1.65;
+</p>
+<p>
+        color: rgba(245,242,238,0.5);
+</p>
+<p>
+        margin-bottom: 20px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .project-stack {
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        flex-wrap: wrap;
+</p>
+<p>
+        gap: 6px;
+</p>
+<p>
+        margin-top: auto;
+</p>
+<p>
+      }
+</p>
+<p>
+      .stack-pill {
+</p>
+<p>
+        font-size: 0.65rem;
+</p>
+<p>
+        font-family: 'JetBrains Mono', monospace;
+</p>
+<p>
+        padding: 4px 10px;
+</p>
+<p>
+        border-radius: 100px;
+</p>
+<p>
+        background: rgba(255,255,255,0.05);
+</p>
+<p>
+        color: rgba(245,242,238,0.6);
+</p>
+<p>
+        border: 1px solid var(--border);
+</p>
+<p>
+        letter-spacing: 0.04em;
+</p>
+<p>
+      }
+</p>
+<p>
+      .stack-pill.ai {
+</p>
+<p>
+        background: rgba(200,245,74,0.08);
+</p>
+<p>
+        color: var(--accent);
+</p>
+<p>
+        border-color: rgba(200,245,74,0.2);
+</p>
+<p>
+      }
+</p>
+<p>
+      /* EXPERIENCE */
+</p>
+<p>
+      .exp-grid {
+</p>
+<p>
+        display: grid;
+</p>
+<p>
+        grid-template-columns: 280px 1fr;
+</p>
+<p>
+        gap: 60px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .exp-timeline {
+</p>
+<p>
+        position: relative;
+</p>
+<p>
+        padding-left: 24px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .exp-timeline::before {
+</p>
+<p>
+        content: '';
+</p>
+<p>
+        position: absolute;
+</p>
+<p>
+        left: 0; top: 8px; bottom: 0;
+</p>
+<p>
+        width: 1px;
+</p>
+<p>
+        background: linear-gradient(to bottom, var(--accent), transparent);
+</p>
+<p>
+      }
+</p>
+<p>
+      .exp-date {
+</p>
+<p>
+        font-family: 'JetBrains Mono', monospace;
+</p>
+<p>
+        font-size: 0.78rem;
+</p>
+<p>
+        color: var(--accent);
+</p>
+<p>
+        margin-bottom: 8px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .exp-company {
+</p>
+<p>
+        font-size: 1.1rem;
+</p>
+<p>
+        font-weight: 700;
+</p>
+<p>
+        color: var(--white);
+</p>
+<p>
+        margin-bottom: 4px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .exp-location {
+</p>
+<p>
+        font-size: 0.78rem;
+</p>
+<p>
+        color: var(--muted);
+</p>
+<p>
+      }
+</p>
+<p>
+      .exp-dot {
+</p>
+<p>
+        position: absolute;
+</p>
+<p>
+        left: -5px; top: 8px;
+</p>
+<p>
+        width: 10px; height: 10px;
+</p>
+<p>
+        background: var(--accent);
+</p>
+<p>
+        border-radius: 50%;
+</p>
+<p>
+        box-shadow: 0 0 12px var(--accent);
+</p>
+<p>
+      }
+</p>
+<p>
+      .exp-role {
+</p>
+<p>
+        font-size: 1.5rem;
+</p>
+<p>
+        font-weight: 700;
+</p>
+<p>
+        margin-bottom: 20px;
+</p>
+<p>
+        color: var(--white);
+</p>
+<p>
+      }
+</p>
+<p>
+      .exp-points {
+</p>
+<p>
+        list-style: none;
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        flex-direction: column;
+</p>
+<p>
+        gap: 14px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .exp-points li {
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        gap: 14px;
+</p>
+<p>
+        font-size: 0.9rem;
+</p>
+<p>
+        line-height: 1.65;
+</p>
+<p>
+        color: rgba(245,242,238,0.65);
+</p>
+<p>
+      }
+</p>
+<p>
+      .exp-points li::before {
+</p>
+<p>
+        content: '→';
+</p>
+<p>
+        color: var(--accent);
+</p>
+<p>
+        font-weight: 600;
+</p>
+<p>
+        flex-shrink: 0;
+</p>
+<p>
+        margin-top: 1px;
+</p>
+<p>
+      }
+</p>
+<p>
+      /* TECH STACK */
+</p>
+<p>
+      .tech-section {
+</p>
+<p>
+        border-top: 1px solid var(--border);
+</p>
+<p>
+      }
+</p>
+<p>
+      .tech-groups {
+</p>
+<p>
+        display: grid;
+</p>
+<p>
+        grid-template-columns: repeat(3, 1fr);
+</p>
+<p>
+        gap: 32px;
+</p>
+<p>
+        margin-top: 0;
+</p>
+<p>
+      }
+</p>
+<p>
+      .tech-group {
+</p>
+<p>
+        background: var(--card-bg);
+</p>
+<p>
+        border: 1px solid var(--border);
+</p>
+<p>
+        border-radius: 20px;
+</p>
+<p>
+        padding: 32px;
+</p>
+<p>
+        transition: border-color 0.3s;
+</p>
+<p>
+      }
+</p>
+<p>
+      .tech-group:hover { border-color: rgba(200,245,74,0.2); }
+</p>
+<p>
+      .tech-group-title {
+</p>
+<p>
+        font-size: 0.72rem;
+</p>
+<p>
+        font-weight: 700;
+</p>
+<p>
+        letter-spacing: 0.14em;
+</p>
+<p>
+        text-transform: uppercase;
+</p>
+<p>
+        color: var(--accent);
+</p>
+<p>
+        margin-bottom: 20px;
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        align-items: center;
+</p>
+<p>
+        gap: 10px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .tech-group-title span {
+</p>
+<p>
+        font-size: 1.1rem;
+</p>
+<p>
+      }
+</p>
+<p>
+      .tech-items {
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        flex-wrap: wrap;
+</p>
+<p>
+        gap: 8px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .tech-item {
+</p>
+<p>
+        font-size: 0.78rem;
+</p>
+<p>
+        font-family: 'JetBrains Mono', monospace;
+</p>
+<p>
+        color: rgba(245,242,238,0.75);
+</p>
+<p>
+        background: rgba(255,255,255,0.04);
+</p>
+<p>
+        border: 1px solid var(--border);
+</p>
+<p>
+        padding: 6px 12px;
+</p>
+<p>
+        border-radius: 8px;
+</p>
+<p>
+        transition: background 0.2s, color 0.2s;
+</p>
+<p>
+      }
+</p>
+<p>
+      .tech-item:hover {
+</p>
+<p>
+        background: rgba(200,245,74,0.08);
+</p>
+<p>
+        color: var(--accent);
+</p>
+<p>
+        border-color: rgba(200,245,74,0.2);
+</p>
+<p>
+      }
+</p>
+<p>
+      /* CONTACT */
+</p>
+<p>
+      .contact {
+</p>
+<p>
+        background: 
+</p>
+<p>
+          radial-gradient(ellipse 80% 60% at 50% 100%, rgba(200,245,74,0.08) 0%, transparent 60%);
+</p>
+<p>
+        border-top: 1px solid var(--border);
+</p>
+<p>
+        text-align: center;
+</p>
+<p>
+      }
+</p>
+<p>
+      .contact-email {
+</p>
+<p>
+        display: inline-block;
+</p>
+<p>
+        font-size: clamp(1.8rem, 3.5vw, 3rem);
+</p>
+<p>
+        font-weight: 800;
+</p>
+<p>
+        color: var(--white);
+</p>
+<p>
+        text-decoration: none;
+</p>
+<p>
+        letter-spacing: -0.02em;
+</p>
+<p>
+        border-bottom: 2px solid var(--accent);
+</p>
+<p>
+        padding-bottom: 4px;
+</p>
+<p>
+        transition: color 0.3s;
+</p>
+<p>
+        margin-bottom: 48px;
+</p>
+<p>
+      }
+</p>
+<p>
+      .contact-email:hover { color: var(--accent); }
+</p>
+<p>
+      .contact-links {
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        justify-content: center;
+</p>
+<p>
+        gap: 24px;
+</p>
+<p>
+        flex-wrap: wrap;
+</p>
+<p>
+      }
+</p>
+<p>
+      .contact-link {
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        align-items: center;
+</p>
+<p>
+        gap: 8px;
+</p>
+<p>
+        color: var(--muted);
+</p>
+<p>
+        text-decoration: none;
+</p>
+<p>
+        font-size: 0.85rem;
+</p>
+<p>
+        font-weight: 500;
+</p>
+<p>
+        border: 1px solid var(--border);
+</p>
+<p>
+        padding: 12px 24px;
+</p>
+<p>
+        border-radius: 100px;
+</p>
+<p>
+        transition: color 0.3s, border-color 0.3s, background 0.3s;
+</p>
+<p>
+        letter-spacing: 0.05em;
+</p>
+<p>
+      }
+</p>
+<p>
+      .contact-link:hover {
+</p>
+<p>
+        color: var(--white);
+</p>
+<p>
+        border-color: rgba(245,242,238,0.3);
+</p>
+<p>
+        background: rgba(245,242,238,0.04);
+</p>
+<p>
+      }
+</p>
+<p>
+      /* FOOTER */
+</p>
+<p>
+      footer {
+</p>
+<p>
+        padding: 32px 60px;
+</p>
+<p>
+        border-top: 1px solid var(--border);
+</p>
+<p>
+        display: flex;
+</p>
+<p>
+        justify-content: space-between;
+</p>
+<p>
+        align-items: center;
+</p>
+<p>
+        font-size: 0.78rem;
+</p>
+<p>
+        color: var(--muted);
+</p>
+<p>
+        font-family: 'JetBrains Mono', monospace;
+</p>
+<p>
+      }
+</p>
+<p>
+      /* ANIMATIONS */
+</p>
+<p>
+      @keyframes fadeUp {
+</p>
+<p>
+        from { opacity: 0; transform: translateY(24px); }
+</p>
+<p>
+        to { opacity: 1; transform: translateY(0); }
+</p>
+<p>
+      }
+</p>
+<p>
+      @keyframes fadeIn {
+</p>
+<p>
+        from { opacity: 0; }
+</p>
+<p>
+        to { opacity: 1; }
+</p>
+<p>
+      }
+</p>
+<p>
+      .reveal {
+</p>
+<p>
+        opacity: 0;
+</p>
+<p>
+        transform: translateY(30px);
+</p>
+<p>
+        transition: opacity 0.7s ease, transform 0.7s ease;
+</p>
+<p>
+      }
+</p>
+<p>
+      .reveal.visible {
+</p>
+<p>
+        opacity: 1;
+</p>
+<p>
+        transform: translateY(0);
+</p>
+<p>
+      }
+</p>
+<p>
+      /* SCROLLBAR */
+</p>
+<p>
+      ::-webkit-scrollbar { width: 4px; }
+</p>
+<p>
+      ::-webkit-scrollbar-track { background: var(--black); }
+</p>
+<p>
+      ::-webkit-scrollbar-thumb { background: rgba(200,245,74,0.3); border-radius: 100px; }
+</p>
+<p>
+      /* MOBILE */
+</p>
+<p>
+      @media (max-width: 900px) {
+</p>
+<p>
+        nav { padding: 20px 24px; }
+</p>
+<p>
+        .nav-links { display: none; }
+</p>
+<p>
+        .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+</p>
+<p>
+        .hero-right { display: none; }
+</p>
+<p>
+        .stats-bar { grid-template-columns: 1fr 1fr; }
+</p>
+<p>
+        section { padding: 70px 24px; }
+</p>
+<p>
+        .about-grid { grid-template-columns: 1fr; gap: 40px; }
+</p>
+<p>
+        .projects-grid { grid-template-columns: 1fr; }
+</p>
+<p>
+        .project-card.featured { grid-column: span 1; }
+</p>
+<p>
+        .exp-grid { grid-template-columns: 1fr; }
+</p>
+<p>
+        .tech-groups { grid-template-columns: 1fr; }
+</p>
+<p>
+        footer { flex-direction: column; gap: 12px; text-align: center; }
+</p>
+<p>
+      }
+</p>
+<p>
+    &lt;/style&gt;
+</p>
+<p>
+    &lt;/head&gt;
+</p>
+<p>
+    &lt;body&gt;
+</p>
+<p>
+    &lt;div class="cursor" id="cursor"&gt;&lt;/div&gt;
+</p>
+<p>
+    &lt;div class="cursor-ring" id="cursorRing"&gt;&lt;/div&gt;
+</p>
+<p>
+    &lt;!-- NAV --&gt;
+</p>
+<p>
+    &lt;nav&gt;
+</p>
+<p>
+      &lt;div class="nav-logo"&gt;RC.&lt;/div&gt;
+</p>
+<p>
+      &lt;ul class="nav-links"&gt;
+</p>
+<p>
+        &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+</p>
+<p>
+        &lt;li&gt;&lt;a href="#projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+</p>
+<p>
+        &lt;li&gt;&lt;a href="#experience"&gt;Experience&lt;/a&gt;&lt;/li&gt;
+</p>
+<p>
+        &lt;li&gt;&lt;a href="#stack"&gt;Stack&lt;/a&gt;&lt;/li&gt;
+</p>
+<p>
+        &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+</p>
+<p>
+      &lt;/ul&gt;
+</p>
+<p>
+      &lt;a href="mailto:rajujava32@gmail.com" class="nav-cta"&gt;Hire Me&lt;/a&gt;
+</p>
+<p>
+    &lt;/nav&gt;
+</p>
+<p>
+    &lt;!-- HERO --&gt;
+</p>
+<p>
+    &lt;section class="hero"&gt;
+</p>
+<p>
+      &lt;div class="hero-bg"&gt;&lt;/div&gt;
+</p>
+<p>
+      &lt;div class="hero-grid-lines"&gt;&lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+      &lt;div class="hero-left"&gt;
+</p>
+<p>
+        &lt;div class="hero-badge"&gt;Available for Opportunities&lt;/div&gt;
+</p>
+<p>
+        &lt;h1 class="hero-name"&gt;Raju &lt;em&gt;CH&lt;/em&gt;&lt;/h1&gt;
+</p>
+<p>
+        &lt;p class="hero-title"&gt;AI Full Stack Developer · &lt;span&gt;MERN + LLM Specialist&lt;/span&gt;&lt;/p&gt;
+</p>
+<p>
+        &lt;p class="hero-desc"&gt;
+</p>
+<p>
+          Building the next generation of AI-powered applications — from autonomous agent systems to 
+</p>
+<p>
+          full-scale SaaS platforms. 2+ years turning complex AI concepts into production-ready products.
+</p>
+<p>
+        &lt;/p&gt;
+</p>
+<p>
+        &lt;div class="hero-actions"&gt;
+</p>
+<p>
+          &lt;a href="#projects" class="btn-primary"&gt;View Projects&lt;/a&gt;
+</p>
+<p>
+          &lt;a href="mailto:rajujava32@gmail.com" class="btn-ghost"&gt;Get in Touch&lt;/a&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+      &lt;div class="hero-right"&gt;
+</p>
+<p>
+        &lt;div class="hero-visual"&gt;
+</p>
+<p>
+          &lt;div class="visual-ring"&gt;&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="visual-ring visual-ring-2"&gt;&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="visual-center"&gt;
+</p>
+<p>
+            &lt;div class="visual-stat"&gt;10&lt;sup&gt;+&lt;/sup&gt;&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="visual-stat-label"&gt;AI Projects Built&lt;/div&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+          &lt;div class="floating-tags"&gt;
+</p>
+<p>
+            &lt;div class="ftag"&gt;Claude (Anthropic)&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="ftag"&gt;React.js · Node.js&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="ftag"&gt;Google AI Studio&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="ftag"&gt;LLM Agents&lt;/div&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+    &lt;/section&gt;
+</p>
+<p>
+    &lt;!-- STATS BAR --&gt;
+</p>
+<p>
+    &lt;div class="stats-bar"&gt;
+</p>
+<p>
+      &lt;div class="stat-item"&gt;
+</p>
+<p>
+        &lt;div class="stat-number"&gt;2&lt;sup&gt;+&lt;/sup&gt;&lt;/div&gt;
+</p>
+<p>
+        &lt;div class="stat-label"&gt;Years Experience&lt;/div&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+      &lt;div class="stat-item"&gt;
+</p>
+<p>
+        &lt;div class="stat-number"&gt;10&lt;sup&gt;+&lt;/sup&gt;&lt;/div&gt;
+</p>
+<p>
+        &lt;div class="stat-label"&gt;AI Projects&lt;/div&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+      &lt;div class="stat-item"&gt;
+</p>
+<p>
+        &lt;div class="stat-number"&gt;3&lt;sup&gt;+&lt;/sup&gt;&lt;/div&gt;
+</p>
+<p>
+        &lt;div class="stat-label"&gt;LLM Platforms&lt;/div&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+      &lt;div class="stat-item"&gt;
+</p>
+<p>
+        &lt;div class="stat-number"&gt;∞&lt;/div&gt;
+</p>
+<p>
+        &lt;div class="stat-label"&gt;Ideas to Build&lt;/div&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+    &lt;/div&gt;
+</p>
+<p>
+    &lt;!-- ABOUT --&gt;
+</p>
+<p>
+    &lt;section id="about"&gt;
+</p>
+<p>
+      &lt;div class="section-label"&gt;About Me&lt;/div&gt;
+</p>
+<p>
+      &lt;div class="about-grid"&gt;
+</p>
+<p>
+        &lt;div&gt;
+</p>
+<p>
+          &lt;h2 class="section-title"&gt;Crafting AI that&lt;br&gt;&lt;em&gt;actually works&lt;/em&gt;&lt;/h2&gt;
+</p>
+<p>
+          &lt;div class="about-text"&gt;
+</p>
+<p>
+            &lt;p&gt;
+</p>
+<p>
+              I'm an &lt;strong&gt;AI Full Stack Developer&lt;/strong&gt; based in Bangalore, with a passion for building 
+</p>
+<p>
+              intelligent systems that solve real problems. I specialize in the MERN stack, but my true 
+</p>
+<p>
+              edge is in weaving AI into every layer of an application.
+</p>
+<p>
+            &lt;/p&gt;
+</p>
+<p>
+            &lt;p&gt;
+</p>
+<p>
+              From &lt;strong&gt;autonomous AI agents&lt;/strong&gt; that make business decisions, to &lt;strong&gt;generative AI platforms&lt;/strong&gt; 
+</p>
+<p>
+              that replace entire workflows — I architect end-to-end systems using Claude (Anthropic), 
+</p>
+<p>
+              Google AI Studio, and modern LLM APIs.
+</p>
+<p>
+            &lt;/p&gt;
+</p>
+<p>
+            &lt;p&gt;
+</p>
+<p>
+              I don't just integrate AI — I design the &lt;strong&gt;prompt architectures, agent workflows, 
+</p>
+<p>
+              and data pipelines&lt;/strong&gt; that make intelligent applications genuinely useful in production.
+</p>
+<p>
+            &lt;/p&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+        &lt;div class="skills-grid"&gt;
+</p>
+<p>
+          &lt;div class="skill-card reveal"&gt;
+</p>
+<p>
+            &lt;div class="skill-card-icon"&gt;🤖&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="skill-card-title"&gt;AI Agent Design&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="skill-card-tags"&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;Orchestration&lt;/span&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;Workflows&lt;/span&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;LLM Reasoning&lt;/span&gt;
+</p>
+<p>
+            &lt;/div&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+          &lt;div class="skill-card reveal"&gt;
+</p>
+<p>
+            &lt;div class="skill-card-icon"&gt;⚡&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="skill-card-title"&gt;Full Stack Dev&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="skill-card-tags"&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;React.js&lt;/span&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;Node.js&lt;/span&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;MongoDB&lt;/span&gt;
+</p>
+<p>
+            &lt;/div&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+          &lt;div class="skill-card reveal"&gt;
+</p>
+<p>
+            &lt;div class="skill-card-icon"&gt;🧠&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="skill-card-title"&gt;Prompt Engineering&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="skill-card-tags"&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;Templates&lt;/span&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;SEO&lt;/span&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;Content Pipelines&lt;/span&gt;
+</p>
+<p>
+            &lt;/div&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+          &lt;div class="skill-card reveal"&gt;
+</p>
+<p>
+            &lt;div class="skill-card-icon"&gt;🎨&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="skill-card-title"&gt;Generative AI&lt;/div&gt;
+</p>
+<p>
+            &lt;div class="skill-card-tags"&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;Image Gen&lt;/span&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;Video AI&lt;/span&gt;
+</p>
+<p>
+              &lt;span class="skill-tag"&gt;SaaS&lt;/span&gt;
+</p>
+<p>
+            &lt;/div&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+    &lt;/section&gt;
+</p>
+<p>
+    &lt;!-- PROJECTS --&gt;
+</p>
+<p>
+    &lt;section id="projects" class="projects"&gt;
+</p>
+<p>
+      &lt;div class="section-label"&gt;Featured Work&lt;/div&gt;
+</p>
+<p>
+      &lt;h2 class="section-title"&gt;Projects that &lt;em&gt;ship&lt;/em&gt;&lt;/h2&gt;
+</p>
+<p>
+      &lt;div class="projects-grid"&gt;
+</p>
+<p>
+        &lt;div class="project-card featured reveal"&gt;
+</p>
+<p>
+          &lt;div class="project-num"&gt;01 / Featured&lt;/div&gt;
+</p>
+<p>
+          &lt;span class="project-icon"&gt;☕&lt;/span&gt;
+</p>
+<p>
+          &lt;div class="project-title"&gt;Coffee Franchise Intelligence Agent&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-desc"&gt;An AI agent that evaluates business potential for coffee franchise locations using pincode-based data. Integrates demographic, foot-traffic, and competitor signals to produce actionable feasibility reports — eliminating manual market research.&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-stack"&gt;
+</p>
+<p>
+            &lt;span class="stack-pill ai"&gt;Claude (Anthropic)&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill ai"&gt;Google AI Studio&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;Node.js&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;Location APIs&lt;/span&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+        &lt;div class="project-card reveal"&gt;
+</p>
+<p>
+          &lt;div class="project-num"&gt;02&lt;/div&gt;
+</p>
+<p>
+          &lt;span class="project-icon"&gt;📸&lt;/span&gt;
+</p>
+<p>
+          &lt;div class="project-title"&gt;Catalog AI Studio&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-desc"&gt;Automates professional product photography using AI — no physical studio needed. Generates catalog-ready images with custom backgrounds, lighting, and branding.&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-stack"&gt;
+</p>
+<p>
+            &lt;span class="stack-pill ai"&gt;Generative AI&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;React.js&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;Node.js&lt;/span&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+        &lt;div class="project-card reveal"&gt;
+</p>
+<p>
+          &lt;div class="project-num"&gt;03&lt;/div&gt;
+</p>
+<p>
+          &lt;span class="project-icon"&gt;🏠&lt;/span&gt;
+</p>
+<p>
+          &lt;div class="project-title"&gt;Real Estate Broker Discovery Agent&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-desc"&gt;Pincode-based AI tool that identifies and ranks real estate brokers using LLM reasoning over structured data. Saves hours of manual outreach for buyers and investors.&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-stack"&gt;
+</p>
+<p>
+            &lt;span class="stack-pill ai"&gt;Claude (Anthropic)&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill ai"&gt;Google AI Studio&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;React.js&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;Node.js&lt;/span&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+        &lt;div class="project-card reveal"&gt;
+</p>
+<p>
+          &lt;div class="project-num"&gt;04&lt;/div&gt;
+</p>
+<p>
+          &lt;span class="project-icon"&gt;📊&lt;/span&gt;
+</p>
+<p>
+          &lt;div class="project-title"&gt;HeroMetricX — SaaS Platform&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-desc"&gt;Full-stack SaaS built independently on MERN. Multi-tenant data models, authentication, subscription control, and real-time analytics dashboards.&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-stack"&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;MongoDB&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;Express.js&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;React.js&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;Node.js&lt;/span&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+        &lt;div class="project-card reveal"&gt;
+</p>
+<p>
+          &lt;div class="project-num"&gt;05&lt;/div&gt;
+</p>
+<p>
+          &lt;span class="project-icon"&gt;📱&lt;/span&gt;
+</p>
+<p>
+          &lt;div class="project-title"&gt;SMO Agents — Content Planner&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-desc"&gt;Generates a full month of social media content from minimal input. Automates captions, hashtags, and content calendars for Posts, Reels, and Stories.&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-stack"&gt;
+</p>
+<p>
+            &lt;span class="stack-pill ai"&gt;LLM APIs&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;React.js&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;Node.js&lt;/span&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+        &lt;div class="project-card reveal"&gt;
+</p>
+<p>
+          &lt;div class="project-num"&gt;06&lt;/div&gt;
+</p>
+<p>
+          &lt;span class="project-icon"&gt;🔍&lt;/span&gt;
+</p>
+<p>
+          &lt;div class="project-title"&gt;SEO Agent Framework&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-desc"&gt;End-to-end AI agent blueprint for automated SEO planning, keyword research, and content structuring — used as production blueprint by engineering teams.&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-stack"&gt;
+</p>
+<p>
+            &lt;span class="stack-pill ai"&gt;Claude (Anthropic)&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill ai"&gt;Google AI Studio&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;Prompt Engineering&lt;/span&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+        &lt;div class="project-card reveal"&gt;
+</p>
+<p>
+          &lt;div class="project-num"&gt;07&lt;/div&gt;
+</p>
+<p>
+          &lt;span class="project-icon"&gt;👗&lt;/span&gt;
+</p>
+<p>
+          &lt;div class="project-title"&gt;Studio AI — Apparel Photography&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-desc"&gt;AI-powered apparel shoots without physical studios. Transforms basic product shots into high-end fashion imagery with custom model and style controls.&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-stack"&gt;
+</p>
+<p>
+            &lt;span class="stack-pill ai"&gt;Generative AI&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;React.js&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;Node.js&lt;/span&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+        &lt;div class="project-card reveal"&gt;
+</p>
+<p>
+          &lt;div class="project-num"&gt;08&lt;/div&gt;
+</p>
+<p>
+          &lt;span class="project-icon"&gt;🎬&lt;/span&gt;
+</p>
+<p>
+          &lt;div class="project-title"&gt;Ads Agent — Video &amp; Catalog Generator&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-desc"&gt;Produces marketing videos from text prompts or product catalogs automatically. Parses product data to synthesize professional video advertisements at scale.&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="project-stack"&gt;
+</p>
+<p>
+            &lt;span class="stack-pill ai"&gt;Video AI APIs&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill ai"&gt;Generative AI&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="stack-pill"&gt;Node.js&lt;/span&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+    &lt;/section&gt;
+</p>
+<p>
+    &lt;!-- EXPERIENCE --&gt;
+</p>
+<p>
+    &lt;section id="experience"&gt;
+</p>
+<p>
+      &lt;div class="section-label"&gt;Experience&lt;/div&gt;
+</p>
+<p>
+      &lt;h2 class="section-title"&gt;Where I've &lt;em&gt;worked&lt;/em&gt;&lt;/h2&gt;
+</p>
+<p>
+      &lt;div class="exp-grid reveal"&gt;
+</p>
+<p>
+        &lt;div class="exp-timeline"&gt;
+</p>
+<p>
+          &lt;div class="exp-dot"&gt;&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="exp-date"&gt;Nov 2023 — Present&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="exp-company"&gt;RInteger&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="exp-location"&gt;📍 Bangalore, India&lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+        &lt;div&gt;
+</p>
+<p>
+          &lt;div class="exp-role"&gt;MERN Stack Developer&lt;/div&gt;
+</p>
+<p>
+          &lt;ul class="exp-points"&gt;
+</p>
+<p>
+            &lt;li&gt;Developed advanced React.js components using Hooks and Context API for complex state management across large-scale applications.&lt;/li&gt;
+</p>
+<p>
+            &lt;li&gt;Built GraphQL resolvers and schemas with Apollo Server, significantly optimizing data fetching efficiency.&lt;/li&gt;
+</p>
+<p>
+            &lt;li&gt;Implemented complex SQL joins and aggregations for business intelligence reporting and analytics.&lt;/li&gt;
+</p>
+<p>
+            &lt;li&gt;Optimized component rendering using useMemo and useCallback, improving application performance and user experience.&lt;/li&gt;
+</p>
+<p>
+          &lt;/ul&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+    &lt;/section&gt;
+</p>
+<p>
+    &lt;!-- TECH STACK --&gt;
+</p>
+<p>
+    &lt;section id="stack" class="tech-section"&gt;
+</p>
+<p>
+      &lt;div class="section-label"&gt;Technical Skills&lt;/div&gt;
+</p>
+<p>
+      &lt;h2 class="section-title"&gt;Tools I &lt;em&gt;master&lt;/em&gt;&lt;/h2&gt;
+</p>
+<p>
+      &lt;div class="tech-groups"&gt;
+</p>
+<p>
+        &lt;div class="tech-group reveal"&gt;
+</p>
+<p>
+          &lt;div class="tech-group-title"&gt;&lt;span&gt;🖥️&lt;/span&gt; Frontend&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="tech-items"&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;React.js&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;Redux&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;Context API&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;Hooks&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;JavaScript ES6+&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;HTML5&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;CSS3&lt;/span&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+        &lt;div class="tech-group reveal"&gt;
+</p>
+<p>
+          &lt;div class="tech-group-title"&gt;&lt;span&gt;⚙️&lt;/span&gt; Backend &amp; DB&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="tech-items"&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;Node.js&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;Express.js&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;REST APIs&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;GraphQL&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;MongoDB&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;MySQL&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;BigQuery&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;Java&lt;/span&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+        &lt;div class="tech-group reveal"&gt;
+</p>
+<p>
+          &lt;div class="tech-group-title"&gt;&lt;span&gt;🤖&lt;/span&gt; AI &amp; LLMs&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="tech-items"&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;Anthropic API&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;Google AI Studio&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;Prompt Engineering&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;AI Agent Design&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;Image Gen APIs&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;Video AI APIs&lt;/span&gt;
+</p>
+<p>
+            &lt;span class="tech-item"&gt;LLM Orchestration&lt;/span&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+    &lt;/section&gt;
+</p>
+<p>
+    &lt;!-- CONTACT --&gt;
+</p>
+<p>
+    &lt;section id="contact" class="contact"&gt;
+</p>
+<p>
+      &lt;div class="section-label" style="justify-content:center;"&gt;Get in Touch&lt;/div&gt;
+</p>
+<p>
+      &lt;h2 class="section-title" style="margin-bottom:32px;"&gt;Let's build something&lt;br&gt;&lt;em&gt;remarkable&lt;/em&gt;&lt;/h2&gt;
+</p>
+<p>
+      &lt;p style="color:var(--muted);margin-bottom:40px;font-size:0.95rem;"&gt;Open to full-time roles, freelance AI projects, and SaaS collaborations.&lt;/p&gt;
+</p>
+<p>
+      &lt;a href="mailto:rajujava32@gmail.com" class="contact-email"&gt;rajujava32@gmail.com&lt;/a&gt;
+</p>
+<p>
+      &lt;div class="contact-links"&gt;
+</p>
+<p>
+        &lt;a href="tel:+918497097982" class="contact-link"&gt;📞 +91 84970 97982&lt;/a&gt;
+</p>
+<p>
+        &lt;a href="#" class="contact-link"&gt;📍 Bangalore, India&lt;/a&gt;
+</p>
+<p>
+        &lt;a href="mailto:rajujava32@gmail.com" class="contact-link"&gt;✉️ Send Email&lt;/a&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+    &lt;/section&gt;
+</p>
+<p>
+    &lt;!-- FOOTER --&gt;
+</p>
+<p>
+    &lt;footer&gt;
+</p>
+<p>
+      &lt;span&gt;© 2025 Raju CH. All rights reserved.&lt;/span&gt;
+</p>
+<p>
+      &lt;span&gt;AI Full Stack Developer · Bangalore&lt;/span&gt;
+</p>
+<p>
+    &lt;/footer&gt;
+</p>
+<p>
+    &lt;script&gt;
+</p>
+<p>
+      // Custom cursor
+</p>
+<p>
+      const cursor = document.getElementById('cursor');
+</p>
+<p>
+      const ring = document.getElementById('cursorRing');
+</p>
+<p>
+      let mx = 0, my = 0, rx = 0, ry = 0;
+</p>
+<p>
+      document.addEventListener('mousemove', e =&gt; {
+</p>
+<p>
+        mx = e.clientX; my = e.clientY;
+</p>
+<p>
+        cursor.style.left = mx - 6 + 'px';
+</p>
+<p>
+        cursor.style.top = my - 6 + 'px';
+</p>
+<p>
+      });
+</p>
+<p>
+      function animRing() {
+</p>
+<p>
+        rx += (mx - rx) * 0.12;
+</p>
+<p>
+        ry += (my - ry) * 0.12;
+</p>
+<p>
+        ring.style.left = rx - 18 + 'px';
+</p>
+<p>
+        ring.style.top = ry - 18 + 'px';
+</p>
+<p>
+        requestAnimationFrame(animRing);
+</p>
+<p>
+      }
+</p>
+<p>
+      animRing();
+</p>
+<p>
+      document.querySelectorAll('a, button').forEach(el =&gt; {
+</p>
+<p>
+        el.addEventListener('mouseenter', () =&gt; {
+</p>
+<p>
+          cursor.style.transform = 'scale(2)';
+</p>
+<p>
+          ring.style.transform = 'scale(1.5)';
+</p>
+<p>
+          ring.style.opacity = '0.8';
+</p>
+<p>
+        });
+</p>
+<p>
+        el.addEventListener('mouseleave', () =&gt; {
+</p>
+<p>
+          cursor.style.transform = 'scale(1)';
+</p>
+<p>
+          ring.style.transform = 'scale(1)';
+</p>
+<p>
+          ring.style.opacity = '0.5';
+</p>
+<p>
+        });
+</p>
+<p>
+      });
+</p>
+<p>
+      // Scroll reveal
+</p>
+<p>
+      const reveals = document.querySelectorAll('.reveal');
+</p>
+<p>
+      const observer = new IntersectionObserver(entries =&gt; {
+</p>
+<p>
+        entries.forEach((e, i) =&gt; {
+</p>
+<p>
+          if (e.isIntersecting) {
+</p>
+<p>
+            setTimeout(() =&gt; e.target.classList.add('visible'), i * 80);
+</p>
+<p>
+            observer.unobserve(e.target);
+</p>
+<p>
+          }
+</p>
+<p>
+        });
+</p>
+<p>
+      }, { threshold: 0.1 });
+</p>
+<p>
+      reveals.forEach(r =&gt; observer.observe(r));
+</p>
+<p>
+    &lt;/script&gt;
+</p>
+<p>
+    &lt;/body&gt;
+</p>
+<p>
+    &lt;/html&gt;
+</p>
